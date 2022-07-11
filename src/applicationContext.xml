@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<import resource="datebase.xml" />
+
+	<bean id="userDao" class="com.onlineExam.dao.UserDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="userService" class="com.onlineExam.service.impl.UserServiceImpl">
+		<property name="dao" ref="userDao"></property>
+	</bean>
+	<bean id="userAction" class="com.onlineExam.action.UserAction">
+		<property name="biz" ref="userService"></property>
+		<property name="dictService" ref="dictService"></property>
+	</bean>
+	
+	<bean id="dictDao" class="com.onlineExam.dao.DictDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="dictService" class="com.onlineExam.service.impl.DictServiceImpl">
+		<property name="dao" ref="dictDao"></property>
+	</bean>
+	<bean id="dictAction" class="com.onlineExam.action.DictAction">
+		<property name="biz" ref="dictService"></property>
+	</bean>
+	
+	<bean id="subjectDao" class="com.onlineExam.dao.SubjectDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="subjectService" class="com.onlineExam.service.impl.SubjectServiceImpl">
+		<property name="dao" ref="subjectDao"></property>
+	</bean>
+	<bean id="subjectAction" class="com.onlineExam.action.SubjectAction">
+		<property name="biz" ref="subjectService"></property>
+	</bean>
+	
+	<bean id="testanswerDao" class="com.onlineExam.dao.TestanswerDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="testanswerService" class="com.onlineExam.service.impl.TestanswerServiceImpl">
+		<property name="dao" ref="testanswerDao"></property>
+	</bean>
+	<bean id="testanswerAction" class="com.onlineExam.action.TestanswerAction">
+		<property name="biz" ref="testanswerService"></property>
+		<property name="testquestionsService" ref="testquestionsService"></property>
+		<property name="subjectService" ref="subjectService"></property>
+	</bean>
+	
+	<bean id="testquestionsDao" class="com.onlineExam.dao.TestquestionsDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="testquestionsService" class="com.onlineExam.service.impl.TestquestionsServiceImpl">
+		<property name="dao" ref="testquestionsDao"></property>
+	</bean>
+	<bean id="testquestionsAction" class="com.onlineExam.action.TestquestionsAction">
+		<property name="biz" ref="testquestionsService"></property>
+		<property name="testanswerService" ref="testanswerService"></property>
+		<property name="subjectService" ref="subjectService"></property>
+	</bean>
+	
+	<bean id="userexamanswerDao" class="com.onlineExam.dao.UserexamanswerDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="userexamanswerService" class="com.onlineExam.service.impl.UserexamanswerServiceImpl">
+		<property name="dao" ref="userexamanswerDao"></property>
+	</bean>
+	<bean id="userexamanswerAction" class="com.onlineExam.action.UserexamanswerAction">
+		<property name="biz" ref="userexamanswerService"></property>
+		<property name="testanswerService" ref="testanswerService"></property>
+		<property name="testquestionsService" ref="testquestionsService"></property>
+		<property name="userexamService" ref="userexamService"></property>
+	</bean>
+	
+	<bean id="userexamDao" class="com.onlineExam.dao.UserexamDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="userexamService" class="com.onlineExam.service.impl.UserexamServiceImpl">
+		<property name="dao" ref="userexamDao"></property>
+	</bean>
+	<bean id="userexamAction" class="com.onlineExam.action.UserexamAction">
+		<property name="biz" ref="userexamService"></property>
+		<property name="testanswerService" ref="testanswerService"></property>
+		<property name="userService" ref="userService"></property>
+		<property name="examService" ref="examService"></property>
+		<property name="userexamanswerService" ref="userexamanswerService"></property>
+	</bean>
+	
+	<bean id="uploadAction" class="com.onlineExam.action.UploadAction">
+	</bean>
+	
+	<bean id="imageCodeAction" class="com.onlineExam.action.ImageCodeAction">
+	</bean>
+	
+	<bean id="examDao" class="com.onlineExam.dao.ExamDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="examService" class="com.onlineExam.service.impl.ExamServiceImpl">
+		<property name="dao" ref="examDao"></property>
+	</bean>
+	<bean id="examAction" class="com.onlineExam.action.ExamAction">
+		<property name="biz" ref="examService"></property>
+		<property name="subjectService" ref="subjectService"></property>
+		<property name="testquestionsService" ref="testquestionsService"></property>
+		<property name="userexamService" ref="userexamService"></property>
+		<property name="collegeService" ref="collegeService"></property>
+		<property name="classesService" ref="classesService"></property>
+	</bean>
+	
+	<bean id="classesDao" class="com.onlineExam.dao.ClassesDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="classesService" class="com.onlineExam.service.impl.ClassesServiceImpl">
+		<property name="dao" ref="classesDao"></property>
+	</bean>
+	<bean id="classesAction" class="com.onlineExam.action.ClassesAction">
+		<property name="biz" ref="classesService"></property>
+	</bean>
+	
+	<bean id="collegeDao" class="com.onlineExam.dao.CollegeDao">
+		<property name="ht" ref="hibernatetemplate"></property>
+	</bean>
+	<bean id="collegeService" class="com.onlineExam.service.impl.CollegeServiceImpl">
+		<property name="dao" ref="collegeDao"></property>
+	</bean>
+	<bean id="collegeAction" class="com.onlineExam.action.CollegeAction">
+		<property name="biz" ref="collegeService"></property>
+	</bean>
+
+</beans>

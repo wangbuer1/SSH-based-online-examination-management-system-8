@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.locale" value="zh_CN" />
+	<constant name="struts.objectFactory" value="spring" />
+	
+	<package name="default" extends="struts-default">
+		<global-results>
+			<result name="reLogin">/login.jsp</result>
+			<result name="to_index">/jsp/main.jsp</result>
+		</global-results>
+		<global-exception-mappings> <!-- 此处定义的result对应于上面的global-results内 捕获所有异常 -->
+			<exception-mapping result="error" exception="java.lang.Exception">
+			</exception-mapping>
+			<exception-mapping result="errorSql" exception="java.sql.SQLException">
+			</exception-mapping>
+		</global-exception-mappings>
+		
+		<action name="dictAction_*" class="dictAction" method="{1}">
+		</action>
+		
+		<action name="uploadAction_*" class="uploadAction" method="{1}">
+		</action>
+		
+		<action name="imageCodeAction_*" class="imageCodeAction" method="{1}">
+		</action>
+
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="to_user_list">/jsp/user_list.jsp</result>
+			<result name="to_addOrEditUser">/jsp/user_addAndEdit.jsp</result>
+			<result name="to_user_listAction" type="redirectAction">
+				<param name="actionName">userAction_findUserAll</param>
+				<param name="role">${role}</param>
+			</result>
+			<result name="to_userInfo_admin">/jsp/user_info_admin.jsp</result>
+			<result name="to_userInfo">/jsp/user_info.jsp</result>
+			<result name="to_userInfo_action" type="redirectAction">userAction_findUserInfo</result>
+		</action>
+		
+		<action name="subjectAction_*" class="subjectAction" method="{1}">
+			<result name="to_subject_list">/jsp/subject_list.jsp</result>
+			<result name="to_addOrEditSubject">/jsp/subject_addAndEdit.jsp</result>
+			<result name="to_subject_listAction" type="redirectAction">subjectAction_findSubjectAll</result>
+		</action>
+		
+		<action name="testanswerAction_*" class="testanswerAction" method="{1}">
+			<result name="to_testanswer_list">/jsp/testanswer_list.jsp</result>
+			<result name="to_addOrEditTestanswer">/jsp/testanswer_addAndEdit.jsp</result>
+			<result name="to_testanswer_listAction" type="redirectAction">
+				<param name="actionName">testanswerAction_findTestanswerAll</param>
+				<param name="testtype">${testtype}</param>	
+			</result>
+		</action>
+		
+		<action name="testquestionsAction_*" class="testquestionsAction" method="{1}">
+			<result name="to_testquestions_list">/jsp/testquestions_list.jsp</result>
+			<result name="to_addOrEditTestquestions">/jsp/testquestions_addAndEdit.jsp</result>
+			<result name="to_testquestions_listAction" type="redirectAction">testquestionsAction_findTestquestionsAll</result>
+		</action>
+		
+		<action name="userexamanswerAction_*" class="userexamanswerAction" method="{1}">
+			<result name="to_userexamanswer_list">/jsp/userexamanswer_list.jsp</result>
+			<result name="to_addOrEditUserexamanswer">/jsp/userexamanswer_addAndEdit.jsp</result>
+			<result name="to_userexamanswer_listAction" type="redirectAction">userexamanswerAction_findUserexamanswerAll</result>
+			<result name="to_userexam_listAction" type="redirectAction">examAction_findExamAll</result>
+		</action>
+		
+		<action name="userexamAction_*" class="userexamAction" method="{1}">
+			<result name="to_userexam_list">/jsp/userexam_list.jsp</result>
+			<result name="to_addOrEditUserexam">/jsp/userexam_addAndEdit.jsp</result>
+			<result name="to_userexam_listAction" type="redirectAction">userexamAction_findUserexamAll</result>
+			<result name="user_examquestion_list">/jsp/user_examquestion_list.jsp</result>
+			<result name="to_user_chengji">/jsp/user_chengji.jsp</result>
+			<result name="to_char">/jsp/chars.jsp</result>
+		</action>
+		
+		<action name="examAction_*" class="examAction" method="{1}">
+			<result name="to_exam_list">/jsp/exam_list.jsp</result>
+			<result name="to_addOrEditExam">/jsp/exam_addAndEdit.jsp</result>
+			<result name="to_exam_listAction" type="redirectAction">examAction_findExamAll</result>
+			<result name="to_examquestions_list">/jsp/examquestion_list.jsp</result>
+		</action>
+		
+		<action name="classesAction_*" class="classesAction" method="{1}">
+			<result name="to_classes_list">/jsp/classes_list.jsp</result>
+			<result name="to_addOrEditClasses">/jsp/classes_addAndEdit.jsp</result>
+			<result name="to_classes_listAction" type="redirectAction">
+				<param name="actionName">classesAction_findClassesAll</param>
+				<param name="collegeid">${collegeid}</param>
+			</result>
+		</action>
+		
+		<action name="collegeAction_*" class="collegeAction" method="{1}">
+			<result name="to_college_list">/jsp/college_list.jsp</result>
+			<result name="to_addOrEditCollege">/jsp/college_addAndEdit.jsp</result>
+			<result name="to_college_listAction" type="redirectAction">collegeAction_findCollegeAll</result>
+		</action>
+	</package>
+</struts>    
